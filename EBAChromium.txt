@@ -1,0 +1,65 @@
+using System;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Collections.Generic;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.ComponentModel;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Data;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Drawing;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.IO;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Linq;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Text;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Threading.Tasks;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using System.Windows.Forms;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using CefSharp;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+using CefSharp.WinForms;
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+namespace EBA
+{//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+    public partial class Form1 : Form
+    {//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        public void InitBrowser()
+        {//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+            Cef.Initialize(new CefSettings());
+            browser = new ChromiumWebBrowser("http://www.eba.gov.tr/#/anasayfa");
+            this.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
+        }//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        public Form1()
+        {//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+            InitializeComponent();
+
+            InitBrowser();
+        }//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        public ChromiumWebBrowser browser;
+
+        //TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        private void Form1_Load(object sender, EventArgs e)
+        {//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+            if (!Directory.Exists(@"C:\EBALog"))
+            {//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+                Directory.CreateDirectory(@"C:\EBALog");
+            } //TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+            string[] start = { DateTime.Now + ": EBA açıldı\n" };
+            File.AppendAllLines(@"C:\EBALog\Log.txt", start);
+            //TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        }//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        //TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+            string[] start = { DateTime.Now + ": EBA Kapatıldı\n" };
+            File.AppendAllLines(@"C:\EBALog\Log.txt", start);
+        }//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+    }//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+}//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
+
+//TheMarqE -------------------------------------------Tüm Hakları Saklıdır!
